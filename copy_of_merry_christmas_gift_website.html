@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Merry Christmas 🎄</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #0b3d2e, #b11226);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+    }
+
+    .screen {
+      display: none;
+      padding: 20px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .active {
+      display: block;
+    }
+
+    button {
+      padding: 15px 25px;
+      border: none;
+      border-radius: 30px;
+      background: #ffd700;
+      color: #000;
+      font-size: 1.1rem;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    .cookie {
+      font-size: 90px;
+      cursor: pointer;
+      animation: bounce 1.5s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .letter {
+      background: rgba(255,255,255,0.95);
+      color: #000;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .snow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .snow span {
+      position: absolute;
+      top: -10px;
+      width: 8px;
+      height: 8px;
+      background: white;
+      border-radius: 50%;
+      animation: snowFall linear infinite;
+    }
+
+    @keyframes snowFall {
+      to {
+        transform: translateY(110vh);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Snow -->
+  <div class="snow" id="snow"></div>
+
+  <!-- Screen 1 -->
+  <div class="screen active" id="screen1">
+    <h1>🎁 Merry Christmas 🎄</h1>
+    <p style="font-size: 1.1rem; line-height: 1.6;">
+        This year has been truly special because of you. Every laugh, every little moment,
+        and every memory we shared has made my days brighter and my heart happier.
+        I had so much fun with you this year, and I genuinely hope that we get to stay together
+        next year too, creating even more beautiful memories.
+        <br><br>
+        May this Christmas wrap you in warmth, joy, and endless smiles, just like you do to everyone around you.
+        <br><br>
+        🎄 Merry Christmas to you, Manasvi 🎄
+      </p>
+    <button onclick="nextScreen(2)">Load Your Gift</button>
+  </div>
+
+  <!-- Screen 2 -->
+  <div class="screen" id="screen2">
+    <h1>🍪 Tap the Cookie</h1>
+    <p class="cookie" onclick="nextScreen(3)">🍪</p>
+  </div>
+
+  <!-- Screen 3 -->
+  <div class="screen" id="screen3">
+    <div class="letter">
+      <h2>Dear Manasvi 💖</h2>
+      <p>
+        I had so much fun with you this year and I hope we can be together next year too.
+        <br><br>
+        🎄 Merry Christmas to you 🎄
+      </p>
+    </div>
+  </div>
+
+  <!-- Audio -->
+  <audio id="song" loop>
+    <source src="snowman.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    function nextScreen(num) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById('screen' + num).classList.add('active');
+
+      if (num === 3) {
+        document.getElementById('song').play();
+      }
+    }
+
+    // Snow generator
+    const snow = document.getElementById('snow');
+    for (let i = 0; i < 40; i++) {
+      const span = document.createElement('span');
+      span.style.left = Math.random() * 100 + 'vw';
+      span.style.animationDuration = 3 + Math.random() * 5 + 's';
+      span.style.opacity = Math.random();
+      snow.appendChild(span);
+    }
+  </script>
+</body>
+</html>
